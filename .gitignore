@@ -1,0 +1,29 @@
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+# System files
+.DS_Store
+
+# Gradle work directory
+.gradle
+
+# Build output directies
+/target
+*/target
+*/**/target
+/build
+*/build
+
+# Eclipse specific files/directories
+.classpath
+.project
+.settings
+.metadata
+bin
+
+# Client files
+/client/node_modules
+/client/npm-debug.log
