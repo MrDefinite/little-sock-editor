@@ -18,14 +18,14 @@ public class Application {
         return new DispatcherServlet();
     }
 
-//    @Bean(name = WebUrls.WEB_SERVLET_REG_BEAN)
-//    public ServletRegistrationBean dispatcherServletRegistration() {
-//        ServletRegistrationBean registrationBean = new ServletRegistrationBean(
-//                dispatcherServlet(),
-//                WebUrls.WEB_CONTEXT_PATH);
-//        registrationBean.setName(WebUrls.WEB_SERVLET_NAME);
-//        return registrationBean;
-//    }
+    @Bean(name = WebUrls.WEB_SERVLET_REG_BEAN)
+    public ServletRegistrationBean dispatcherServletRegistration() {
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(
+                dispatcherServlet(),
+                WebUrls.WEB_CONTEXT_PATTERN);
+        registrationBean.setName(WebUrls.WEB_SERVLET_NAME);
+        return registrationBean;
+    }
 
 }
 

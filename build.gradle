@@ -1,21 +1,12 @@
 group 'org.songli'
 version '1.0-SNAPSHOT'
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.0.RELEASE")
-    }
-}
-
 apply plugin: 'java'
-//apply plugin: 'war'
+apply plugin: 'war'
 //apply plugin: 'jetty'
 apply plugin: 'spring-boot'
 apply plugin: 'idea'
-apply plugin: 'eclipse'
+//apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -28,4 +19,23 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     testCompile "junit:junit:4.+"
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.0.RELEASE")
+    }
+}
+
+task dev {
+    group 'socky-task'
+}
+
+
+task production {
+    group 'socky-task'
+}
+
 
