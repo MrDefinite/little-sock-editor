@@ -6,6 +6,8 @@ apply plugin: 'war'
 //apply plugin: 'jetty'
 apply plugin: 'spring-boot'
 apply plugin: 'idea'
+apply plugin: 'com.moowork.node'
+apply plugin: 'com.moowork.gulp'
 //apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
@@ -23,10 +25,63 @@ dependencies {
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.0.RELEASE")
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.3.0.RELEASE"
+        classpath "com.moowork.gradle:gradle-node-plugin:0.11"
+        classpath 'com.moowork.gradle:gradle-gulp-plugin:0.11'
     }
+}
+
+node {
+    // Version of node to use.
+    version = '4.2.1'
+
+    // Version of npm to use.
+    npmVersion = '2.14.7'
+
+    // Base URL for fetching node distributions (change if you have a mirror).
+    distBaseUrl = 'https://nodejs.org/dist'
+
+    // If true, it will download node using above parameters.
+    // If false, it will try to use globally installed node.
+    download = true
+
+    // Set the work directory for unpacking node
+    workDir = file("${project.buildDir}/nodejs")
+
+    // Set the work directory where node_modules should be located
+    nodeModulesDir = file("${project.projectDir}")
+}
+
+jar {
+    baseName = 'little-sock-editor'
+    version =  '0.1.0'
+}
+
+task gulpDev(type: GulpTask) {
+    group 'socky-task'
+    dependsOn npm_install
+    args = ["dev"]
+}
+
+task gulpProduction(type: GulpTask) {
+    group 'socky-task'
+    dependsOn npm_install
+    args = ["production"]
+}
+
+task clientBuildDev {
+    group 'socky-task'
+    dependsOn gulpDev
+}
+
+task clientBuildProduction {
+    group 'socky-task'
+    dependsOn gulpProduction
 }
 
 task dev {

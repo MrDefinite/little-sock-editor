@@ -1,56 +1,56 @@
 var path = require("path");
 var webpack = require('webpack');
 var $base = '..';
-var $build = $base + '/build';
-var $clientTarget = $build + '/client_target';
-var $clientSrc = $base + '/client';
-var $nodeModules = $base + '/node_modules'
-var $public = 'socky-editor/';
+var buildConfig = require($base + '/buildConfig')($base);
 
 var commonLoaders = [
     {
         test: /\.jsx?$/,
         loader: "babel-loader",
-        include: path.join(__dirname, $clientSrc),
+        include: path.join(__dirname, buildConfig.clientSrc),
         query: {
             presets:['react', 'es2015']
         }
     },
     {
         test: /\.json$/,
-        loader: "json-loader"
+        loader: 'json-loader'
     },
     {
         test: /\.png$/,
-        loader: "url-loader"
+        loader: 'url-loader'
     },
     {
         test: /\.jpg$/,
-        loader: "file-loader"
+        loader: 'file-loader'
     },
     {
         test: /\.html$/,
-        loader: "html-loader"
+        loader: 'html-loader'
     },
     {
         test: /\.less$/,
-        loader: "less-loader"
+        loader: 'less-loader'
     }
 ];
 
 
 module.exports = {
-    context: path.join(__dirname, $clientSrc),
+    context: path.join(__dirname, buildConfig.clientSrc),
     entry: {
         app: './app'
     },
     output: {
-        path: path.join(__dirname, $clientTarget),
+        path: path.join(__dirname, buildConfig.clientPublic),
         filename: 'bundle.js',
         publicPath: '/'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.less']
+        modulesDirectories: [
+            'client',
+            'node_modules'
+        ],
+        extensions: ['', '.js', '.jsx', '.less', '.json']
     },
     module: {
         loaders: commonLoaders

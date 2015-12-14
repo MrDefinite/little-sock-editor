@@ -23,7 +23,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/*")
-                .addResourceLocations("/client/", "classpath:/client/")
+                .addResourceLocations("/public/", "classpath:/public/")
                 .resourceChain(true)
                 .addResolver(new GzipResourceResolver())
                 .addResolver(new PathResourceResolver());

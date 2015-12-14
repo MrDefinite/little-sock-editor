@@ -12,14 +12,12 @@ var webpackConfig = require('./webpack/webpack.config.js');
 var webpackDevServerConfig = require('./webpack/webpack-dev-server.js');
 
 // Path
-var $build = './build';
-var $clientTarget = $build + '/client_target';
-var $clientSrc = './client';
-var $clientEntry = $clientSrc + '/index.html';
-var $nodeModules = './node_modules';
+var $base = '..';
+var buildConfig = require($base + '/buildConfig')($base);
 
 gulp.task('entry', function() {
-    return gulp.src($clientEntry).pipe(gulp.dest($clientTarget));
+    return gulp.src(buildConfig.clientEntry)
+        .pipe(gulp.dest(buildConfig.clientPublic));
 });
 
 gulp.task('webpack', function(callback) {
@@ -43,7 +41,8 @@ gulp.task('webpackDevServer', function() {
     }).listen(8080, "localhost", function(err) {
         if(err) throw new gutil.PluginError("webpack-dev-server", err);
         // Server listening
-        gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
+        gutil.log("[webpack-dev-server]",
+                  "http://localhost:8080/webpack-dev-server/index.html");
 
         // keep the server alive or continue?
         // callback();
