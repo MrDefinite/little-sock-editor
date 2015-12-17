@@ -1,9 +1,6 @@
 {
   "name": "little-sock-editor-client",
   "version": "0.0.1",
-  "scripts": {
-    "build": "webpack --progress --colors --config ./webpack/webpack.config.js"
-  },
   "dependencies": {
     "babel": "^6.1.18",
     "babel-runtime": "^6.2.0",

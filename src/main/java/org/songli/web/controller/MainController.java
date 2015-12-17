@@ -4,11 +4,12 @@ import org.songli.web.WebUrls;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import java.io.IOException;
 
 @Controller
 public class MainController {
 
-    @RequestMapping(value = WebUrls.WEB_CONTEXT_PATH, method = RequestMethod.GET)
+    @RequestMapping(value = WebUrls.UI_CONTEXT, method = RequestMethod.GET)
     public String mainPage() {
         return "index";
     }

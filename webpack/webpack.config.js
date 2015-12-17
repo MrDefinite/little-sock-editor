@@ -25,6 +25,10 @@ var commonLoaders = [
         loader: 'file-loader'
     },
     {
+        test: /\.ftl$/,
+        loader: 'html-loader'
+    },
+    {
         test: /\.html$/,
         loader: 'html-loader'
     },

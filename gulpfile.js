@@ -12,8 +12,8 @@ var webpackConfig = require('./webpack/webpack.config.js');
 var webpackDevServerConfig = require('./webpack/webpack-dev-server.js');
 
 // Path
-var $base = '..';
-var buildConfig = require($base + '/buildConfig')($base);
+var $base = '.';
+var buildConfig = require('./buildConfig')($base);
 
 gulp.task('entry', function() {
     return gulp.src(buildConfig.clientEntry)

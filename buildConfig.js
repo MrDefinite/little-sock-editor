@@ -1,9 +1,9 @@
-var $build = './build',
+var $build = '/build',
     $clientTarget = $build + '/client_target',
     $clientPublic = $clientTarget + '/public',
-    $clientSrc = './client',
-    $clientEntry = $clientSrc + '/index.html',
-    $nodeModules = './node_modules';
+    $clientSrc = '/client',
+    $clientEntry = $clientSrc + '/index.ftl',
+    $nodeModules = '/node_modules';
 
 module.exports = function(base) {
     return {

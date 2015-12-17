@@ -7,17 +7,17 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{WebConfig.class};
+        return new Class<?>[] { MainConfig.class, WebConfig.class };
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[] { WebUrls.WEB_CONTEXT_PATTERN };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class<?>[]{};
-    }
-
-    @Override
-    protected String[] getServletMappings() {
-        return new String[]{WebUrls.WEB_CONTEXT_PATH};
     }
 
     @Override

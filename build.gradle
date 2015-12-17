@@ -19,6 +19,8 @@ repositories {
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-freemarker:1.3.0.RELEASE"
+    providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
     testCompile "junit:junit:4.+"
 }
 
@@ -39,58 +41,30 @@ buildscript {
 node {
     // Version of node to use.
     version = '4.2.1'
-
     // Version of npm to use.
     npmVersion = '2.14.7'
-
     // Base URL for fetching node distributions (change if you have a mirror).
     distBaseUrl = 'https://nodejs.org/dist'
-
     // If true, it will download node using above parameters.
     // If false, it will try to use globally installed node.
     download = true
-
     // Set the work directory for unpacking node
     workDir = file("${project.buildDir}/nodejs")
-
     // Set the work directory where node_modules should be located
     nodeModulesDir = file("${project.projectDir}")
 }
 
-jar {
-    baseName = 'little-sock-editor'
-    version =  '0.1.0'
+configurations {
+    providedRuntime
 }
 
-task gulpDev(type: GulpTask) {
+task gulpProcess(type: GulpTask, dependsOn: npm_install) {
     group 'socky-task'
-    dependsOn npm_install
-    args = ["dev"]
-}
-
-task gulpProduction(type: GulpTask) {
-    group 'socky-task'
-    dependsOn npm_install
     args = ["production"]
 }
 
-task clientBuildDev {
-    group 'socky-task'
-    dependsOn gulpDev
+war {
+    dependsOn gulpProcess
+    from 'build/client_target'
 }
-
-task clientBuildProduction {
-    group 'socky-task'
-    dependsOn gulpProduction
-}
-
-task dev {
-    group 'socky-task'
-}
-
-
-task production {
-    group 'socky-task'
-}
-
 
